@@ -17,40 +17,42 @@ public class SalasananVahvuus {
 
 
 	}  
-	public static boolean salasananMuuttujat(String salasana) {  
+	public static boolean salasananMuuttujat(String salasana ) {  
+		boolean testi = true;
+
 		if (salasana.length() < 10){  
 			System.out.println("salasana on alle 10 merkkiä pitkä, anna uusi");  
-			return false;  
+			testi = false;  
 		} 
 		if (!salasana.matches(".*\\d+.*")){  
 			System.out.println("salasanasta puuttuu numero");  
-			return false;  
+			testi = false; 
 		}  
 		if (!salasana.matches(".*[äöÄÖ]+.*")){  
 			System.out.println("salasanasta puuttuu ääkkönen");  
-			return false;  
+			testi = false; 
 		} 
 		if (salasana.equals(salasana.toLowerCase())){ 
 			System.out.println("salasanasta puuttuu iso kirjain"); 
-			return false; 
+			testi = false; 
 		} 
 		if (!salasana.contains("KAKKA")){ 
 			System.out.println("salasanasta puuttuu sana KAKKA"); 
-			return false; 
+			testi = false;  
 		} 
 		if (salasana.contains(" ")){ 
 			System.out.println("salasanassa ei saa olla välilyöntiä"); 
-			return false; 
+			testi = false; 
 		} 
 		if (salasana.contains("!")){ 
 			System.out.println("salasanassa ei saa olla huutomerkkiä"); 
-			return false; 
+			testi = false;  
 		} 
 		if (salasana.length() > 50){  
 			System.out.println("salasana on yli 50 merkkiä pitkä, anna uusi");  
-			return false;  
+			testi = false; 
 		}  
-		return true;  
+		return testi;  
 	}  
 	private static String lueSalasana() {  
 		System.out.println("Anna salasana, sen tulee sisältää ainakin 10 merkkiä, isoja ja pieniä kirjaimia, numeroita sekä ääkkösiä. Ei saa olla välilyöntiä eikä huutomerkkiä, salasana ei myöskään saa olla yli 50merkkiä pitkä");  

@@ -11,6 +11,7 @@ public class SalasananUnitTest {
 		lista.add("asdskdslakdsakdlösakösakd88lsakdöskadäadöksädaslkdäöasköäasköadsädkdlkskaldsakaksd");
 		lista.add("kakkaKAKKAäöäöäöäöäöä1111");
 		for (String salasana : lista) {
+			System.out.println(salasana);
 			System.out.println(SalasananVahvuus.salasananMuuttujat(salasana));
 
 		}
