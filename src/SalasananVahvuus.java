@@ -25,13 +25,14 @@ public class SalasananVahvuus {
 
 
 	}  
-	public static boolean salasananMuuttujat(String salasana ) {  
+	public static boolean salasananMuuttujat(String salasana ) {
+		
 		boolean testi = true;
-
-		if (salasana.length() < 10){  
-			System.out.println("salasana on alle 10 merkkiä pitkä, anna uusi");  
-			testi = false;  
-		} 
+		testi = salasananPituus(salasana);
+		testi = salasananNumero(salasana);
+		
+		
+		
 		if (!salasana.matches(".*\\d+.*")){  
 			System.out.println("Salasanasta puuttuu numero");  
 			testi = false; 
@@ -62,12 +63,31 @@ public class SalasananVahvuus {
 		}  
 		return testi;  
 	}  
+	private static boolean salasananNumero(String salasana) {
+		if (!salasana.matches(".*\\d+.*")){  
+			System.out.println("Salasanasta puuttuu numero");  
+			return false; 
+		}  
+		return true;
+	
+		
+	
+	}
+	private static boolean salasananPituus(String salasana) {
+		if (salasana.length() < 10){
+			System.out.println("Salasana on alle 10 merkkiä pitkä, anna uusi");  
+			return false;  
+		}
+		return true;
+	}
 	private static String lueSalasana() throws FileNotFoundException {  
 		PrintWriter kirjoittaja = new PrintWriter("Salasana.txt");
 		System.out.println("Anna salasana, sen tulee sisältää ainakin 10 merkkiä, isoja ja pieniä kirjaimia, numeroita sekä ääkkösiä. Ei saa olla välilyöntiä eikä huutomerkkiä, salasana ei myöskään saa olla yli 50 merkkiä pitkä");  
-		String salasana = lukija.nextLine(); 
+		String salasana = lukija.nextLine();
+		
 		kirjoittaja.print(salasana);
 		kirjoittaja.close();
+		
 	
 		return salasana;  
 	}   
