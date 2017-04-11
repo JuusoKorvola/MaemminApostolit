@@ -1,19 +1,27 @@
-import java.util.Scanner;   
-
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 
 public class SalasananVahvuus {   
 	private static final Scanner lukija = new Scanner(System.in);    
 	public static void main(String[] args) {  
+		 try {
 		String salasana = lueSalasana();  
 		while (salasananMuuttujat(salasana) == false){  
 			salasana = lueSalasana();  
 		}  
-		tulostaSalasana(salasana);  
+		tulostaSalasana(salasana); 
+		 }
+		 catch (FileNotFoundException f){
+			 System.out.println("Tiedostoa ei löytynyt.");
+		 }
 	}  
-	private static void tulostaSalasana(String salasana) {  
-		System.out.println("Salasanasi on: " +salasana);  
+	private static void tulostaSalasana(String salasana) throws FileNotFoundException {
+		final Scanner tLukija = new Scanner(new File("salasana.txt"));
+		System.out.println("Salasanasi on: " +tLukija.nextLine());
+		tLukija.close();
 
 
 	}  
@@ -25,7 +33,7 @@ public class SalasananVahvuus {
 			testi = false;  
 		} 
 		if (!salasana.matches(".*\\d+.*")){  
-			System.out.println("salasanasta puuttuu numero");  
+			System.out.println("Salasanasta puuttuu numero");  
 			testi = false; 
 		}  
 		if (!salasana.matches(".*[äöÄÖ]+.*")){  
@@ -54,9 +62,13 @@ public class SalasananVahvuus {
 		}  
 		return testi;  
 	}  
-	private static String lueSalasana() {  
-		System.out.println("Anna salasana, sen tulee sisältää ainakin 10 merkkiä, isoja ja pieniä kirjaimia, numeroita sekä ääkkösiä. Ei saa olla välilyöntiä eikä huutomerkkiä, salasana ei myöskään saa olla yli 50merkkiä pitkä");  
-		String salasana = lukija.nextLine();  
+	private static String lueSalasana() throws FileNotFoundException {  
+		PrintWriter kirjoittaja = new PrintWriter("Salasana.txt");
+		System.out.println("Anna salasana, sen tulee sisältää ainakin 10 merkkiä, isoja ja pieniä kirjaimia, numeroita sekä ääkkösiä. Ei saa olla välilyöntiä eikä huutomerkkiä, salasana ei myöskään saa olla yli 50 merkkiä pitkä");  
+		String salasana = lukija.nextLine(); 
+		kirjoittaja.print(salasana);
+		kirjoittaja.close();
+	
 		return salasana;  
 	}   
 
