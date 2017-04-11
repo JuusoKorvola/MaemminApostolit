@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -30,6 +31,7 @@ public class SalasananVahvuus {
 		boolean testi = true;
 		testi = salasananPituus(salasana);
 		testi = salasananNumero(salasana);
+		testi = tarkistaMerkit(salasana);
 		
 		
 		
@@ -48,7 +50,7 @@ public class SalasananVahvuus {
 		if (!salasana.contains("KAKKA")){ 
 			System.out.println("salasanasta puuttuu sana KAKKA"); 
 			testi = false;  
-		} 
+		}
 		if (salasana.contains(" ")){ 
 			System.out.println("salasanassa ei saa olla v‰lilyˆnti‰"); 
 			testi = false; 
@@ -69,14 +71,24 @@ public class SalasananVahvuus {
 			return false; 
 		}  
 		return true;
-	
-		
-	
 	}
 	private static boolean salasananPituus(String salasana) {
 		if (salasana.length() < 10){
 			System.out.println("Salasana on alle 10 merkki‰ pitk‰, anna uusi");  
 			return false;  
+		}
+		return true;
+	}
+	public static boolean tarkistaMerkit(String salasana){
+		ArrayList<String> v‰‰r‰tmerkit = new ArrayList<String>();
+		v‰‰r‰tmerkit.add("p");
+		v‰‰r‰tmerkit.add("d");
+		v‰‰r‰tmerkit.add("x");
+		for (String merkki : v‰‰r‰tmerkit) {
+			if (salasana.contains(merkki)){
+				System.out.println("Salasanassa kiellettyj‰ merkkej‰");
+				return false;
+			}
 		}
 		return true;
 	}
