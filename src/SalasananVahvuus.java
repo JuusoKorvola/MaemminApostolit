@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,6 +10,10 @@ import java.util.TimerTask;
 public class SalasananVahvuus {   
 	private static final Scanner lukija = new Scanner(System.in);    
 	public static void main(String[] args) {  
+		int ajastin = 30;
+		if(args[0] != null){
+			ajastin = Integer.parseInt(args[0]);
+		}
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
@@ -19,8 +22,8 @@ public class SalasananVahvuus {
 				System.exit(0);
 			}
 		};
-		System.out.println("Sinulla on 30 sekuntia aikaa antaa salasana");
-		timer.schedule(task, 30 * 1000);
+		System.out.println("Sinulla on " + ajastin + " sekuntia aikaa antaa salasana");
+		timer.schedule(task, ajastin * 1000);
 		try {
 			String salasana = lueSalasana();  
 			while (salasananMuuttujat(salasana) == false){  
