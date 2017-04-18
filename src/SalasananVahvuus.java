@@ -17,9 +17,10 @@ public class SalasananVahvuus {
 	 * Main funktioniin sisälletty ajastin funktio joka lopettaa ohjelman 30 sekunnin kuluessa. Tämä voidaan myös ajaa cmd linestä parametreillä tai ilman. Ilman parametria salasanansyöttö terminoituu 30 sekunnin kuluessa.
 	 * @param args String[] on siis taulukko tyyppiä, jossa annetaan indeksille arvoksi 30 sekuntia mikäli cmd linestä ei anneta jotakin toista parametria
 	 */
-	public static void main(String[] args) {  
+	public static void main(String[] args) throws ArrayIndexOutOfBoundsException{
+		try {
 		int ajastin = 30;
-		if(args[0] != null){
+		if(args.length >= 1){
 			ajastin = Integer.parseInt(args[0]);
 		}
 		Timer timer = new Timer();
@@ -32,6 +33,11 @@ public class SalasananVahvuus {
 		};
 		System.out.println("Sinulla on " + ajastin + " sekuntia aikaa antaa salasana");
 		timer.schedule(task, ajastin * 1000);
+		}
+		catch (ArrayIndexOutOfBoundsException a){
+			System.out.println("Arvo on taulukon arvon ulkopuolella");
+		
+		}
 		/**
 		 * Try catch joka ottaa kiinni filenotfoundexceptionin mikäli tiedostoa ei löydy tai se on väärässä paikassa tai se on esimerkiksi hakemisto.
 		 */
@@ -73,7 +79,7 @@ public class SalasananVahvuus {
 		sanat.add ("Salasanassa ei saa olla välilyöntiä");
 		sanat.add ("Salasanassa ei saa olla huutomerkkiä");
 		sanat.add ("Salasana ei saa olla yli 50 merkkiä pitkä");
-		sanat.add ("Salasanasta puuttuu sana KAKKA");
+		sanat.add ("Salasanasta puuttuu sana 'data'");
 		sanat.add ("Salasanassa on kiellettyjä merkkejä ';','©','û'");
 
 
@@ -138,7 +144,7 @@ public class SalasananVahvuus {
 	 * @return true jos salasana läpäisee kriteerin
 	 */
 	private static boolean salasananData(String salasana, ArrayList<String> sanat) {
-		if (!salasana.contains("data")){ 
+		if (!salasana.matches((".*\\b(data|DATA|Data|DAta|DATa|dATA|daTA|datA|dAtA|dATa|DatA|)\\b.*"))){ 
 			System.out.println(sanat.get(7)); 
 			return false;
 		}  
